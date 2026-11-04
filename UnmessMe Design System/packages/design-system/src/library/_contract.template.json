@@ -1,0 +1,57 @@
+{
+  "component": "ComponentName",
+  "status": "stable | beta | deprecated",
+  "version": "1.0.0",
+  "category": "atom | pattern | layout",
+  "summary": "One line. What this component is, stated flat. No hedging.",
+  "purpose": "When and why to reach for it, and what it replaces.",
+  "import": "import { ComponentName } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "container", "description": "What this subpart is, in one sentence." }
+  ],
+  "props": [
+    {
+      "name": "propName",
+      "type": "string | number | boolean | 'a' | 'b' | React.ReactNode | () => void",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "What it controls, in one sentence."
+    }
+  ],
+  "variants": [
+    { "name": "primary", "prop": "variant", "description": "What it looks like.", "whenToUse": "The one situation this variant is for." }
+  ],
+  "states": ["default", "hover", "focus", "disabled"],
+  "usageGuidelines": {
+    "whenToUse": ["One deterministic case per line."],
+    "whenNotToUse": [
+      { "scenario": "The case this is the wrong tool for.", "useInstead": "OtherComponent" }
+    ]
+  },
+  "doDont": {
+    "do": ["One deterministic best-practice per line."],
+    "dont": ["One common mistake per line."]
+  },
+  "content": {
+    "voice": "How copy inside this component should sound.",
+    "maxLength": null,
+    "rules": []
+  },
+  "tokensUsed": [
+    { "token": "semantic.action.primary", "usage": "background of the primary variant" }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["One expected key interaction per line."],
+    "aria": ["One required role or attribute per line."],
+    "contrast": "The contrast obligation, stated flat.",
+    "focus": "The focus behavior, stated flat."
+  },
+  "examples": [
+    { "title": "Basic", "code": "<ComponentName />" }
+  ],
+  "related": [
+    { "component": "OtherComponent", "whenToChoose": "How to pick between this and that." }
+  ]
+}

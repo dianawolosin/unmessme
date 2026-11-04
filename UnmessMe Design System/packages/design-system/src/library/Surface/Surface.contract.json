@@ -1,0 +1,79 @@
+{
+  "component": "Surface",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "The base container that carries background, border, blur, and elevation.",
+  "purpose": "Use as the foundation under any card, panel, or grouped region. Reach for it instead of a raw Box or MUI Paper so glass, radius, and depth come from tokens and stay consistent across the system.",
+  "import": "import { Surface } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "container", "description": "A Box that applies the variant fill, border, radius, and elevation shadow." },
+    { "part": "content slot", "description": "children render inside; Surface adds no padding of its own." }
+  ],
+  "props": [
+    { "name": "variant", "type": "'glass' | 'solid' | 'subtle'", "required": false, "default": "glass", "options": ["glass", "solid", "subtle"], "description": "The fill treatment: translucent blurred glass, an opaque canvas fill, or a borderless tint." },
+    { "name": "elevation", "type": "'flat' | 'raised' | 'floating'", "required": false, "default": "flat", "options": ["flat", "raised", "floating"], "description": "Depth via shadow: none, a resting card shadow, or a modal-level shadow." },
+    { "name": "children", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Content rendered inside the surface." },
+    { "name": "sx", "type": "SxProps", "required": false, "default": null, "options": [], "description": "MUI style overrides; inherited from BoxProps, use for layout not for restyling the surface." },
+    { "name": "...BoxProps", "type": "BoxProps", "required": false, "default": null, "options": [], "description": "All MUI Box props pass through (component, onClick, ref, and layout props)." }
+  ],
+  "variants": [
+    { "name": "glass", "prop": "variant", "description": "Translucent surface fill with a medium backdrop blur and a subtle border.", "whenToUse": "The default. Cards and panels that sit over the app background." },
+    { "name": "solid", "prop": "variant", "description": "Opaque canvas fill with a subtle border, no blur.", "whenToUse": "When content behind must be fully hidden or blur would hurt legibility." },
+    { "name": "subtle", "prop": "variant", "description": "Light glass tint with no border.", "whenToUse": "Quiet grouping where a hard edge would be too much." }
+  ],
+  "states": ["default"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Wrapping a card, panel, dialog body, or any grouped region.",
+      "Establishing depth in a stack of layered content."
+    ],
+    "whenNotToUse": [
+      { "scenario": "A full opinionated card with header, body, and actions", "useInstead": "FeatureCard or ProblemCard" },
+      { "scenario": "A modal shell with backdrop and focus trap", "useInstead": "Dialog" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Let the variant and elevation set fill, border, and shadow.",
+      "Add your own padding via sx, since Surface ships none.",
+      "Nest content components inside rather than restyling Surface itself."
+    ],
+    "dont": [
+      "Hardcode a background, border, or box-shadow that a variant already provides.",
+      "Stack floating elevation on many surfaces at once; reserve it for what truly lifts."
+    ]
+  },
+  "content": {
+    "voice": "n/a; Surface is a container and holds no copy of its own.",
+    "maxLength": null,
+    "rules": []
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.bg.surface", "usage": "Fill of the glass variant." },
+    { "token": "color.semantic.bg.canvas", "usage": "Fill of the solid variant." },
+    { "token": "color.semantic.bg.glass_tint", "usage": "Fill of the subtle variant." },
+    { "token": "effect.blur.md", "usage": "Backdrop blur on the glass variant." },
+    { "token": "color.semantic.border.subtle", "usage": "Border on the glass and solid variants." },
+    { "token": "border.width.base", "usage": "Border width." },
+    { "token": "border.style.solid", "usage": "Border style." },
+    { "token": "radius.semantic.lg", "usage": "Corner radius of the container." },
+    { "token": "elevation.semantic.card.rest", "usage": "Shadow of the raised elevation." },
+    { "token": "elevation.semantic.modal", "usage": "Shadow of the floating elevation." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["No interaction of its own; the content inside owns keyboard behavior."],
+    "aria": ["Purely presentational by default; give it a role only if it becomes an interactive region."],
+    "contrast": "Content placed on the surface must clear 4.5:1 against the chosen variant fill.",
+    "focus": "No focus target of its own; focus lives with the content inside."
+  },
+  "examples": [
+    { "title": "Glass panel", "code": "<Surface variant=\"glass\" elevation=\"raised\" sx={{ p: 3 }}>...</Surface>" },
+    { "title": "Solid, flat", "code": "<Surface variant=\"solid\">...</Surface>" }
+  ],
+  "related": [
+    { "component": "FeatureCard", "whenToChoose": "Use FeatureCard for a titled marketing card; Surface is the raw container beneath it." },
+    { "component": "Dialog", "whenToChoose": "Use Dialog for a modal shell; Surface is only the container primitive." }
+  ]
+}

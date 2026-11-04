@@ -1,0 +1,87 @@
+{
+  "component": "Input",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A single-line text field for data entry, styled with the terminal focus ring.",
+  "purpose": "Use for any freeform text or number entry inside a form. Reach for it instead of a raw MUI TextField so the focus ring, border colors, and monospace option come from tokens.",
+  "import": "import { Input } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "label", "description": "The field label; monospace, small, shifts to the action color on focus." },
+    { "part": "field", "description": "The entry area with a tinted surface fill and a notched outline." },
+    { "part": "focus ring", "description": "A token-driven glow applied when the field is focused." }
+  ],
+  "props": [
+    { "name": "variant", "type": "'outlined' | 'standard' | 'filled'", "required": false, "default": "outlined", "options": ["outlined", "standard", "filled"], "description": "The MUI field style; outlined is the system default." },
+    { "name": "monospace", "type": "boolean", "required": false, "default": false, "options": [], "description": "Render the entered value in the monospace font for a code or terminal feel." },
+    { "name": "label", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Field label; inherited from TextField. Always provide one for accessibility." },
+    { "name": "value", "type": "string", "required": false, "default": null, "options": [], "description": "Controlled value; inherited from TextField." },
+    { "name": "onChange", "type": "(e: ChangeEvent) => void", "required": false, "default": null, "options": [], "description": "Change handler; inherited from TextField." },
+    { "name": "placeholder", "type": "string", "required": false, "default": null, "options": [], "description": "Placeholder text; inherited from TextField." },
+    { "name": "disabled", "type": "boolean", "required": false, "default": false, "options": [], "description": "Disable entry; inherited from TextField." },
+    { "name": "error", "type": "boolean", "required": false, "default": false, "options": [], "description": "Mark the field invalid; inherited from TextField." },
+    { "name": "helperText", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Supporting or error text below the field; inherited from TextField." },
+    { "name": "...TextFieldProps", "type": "Omit<TextFieldProps, 'variant'>", "required": false, "default": null, "options": [], "description": "All MUI TextField props except variant pass through (multiline, type, fullWidth, name, and more)." }
+  ],
+  "variants": [
+    { "name": "outlined", "prop": "variant", "description": "Notched outline with a tinted fill.", "whenToUse": "The default field in forms." },
+    { "name": "standard", "prop": "variant", "description": "Underline only, no box.", "whenToUse": "Dense or low-chrome layouts." },
+    { "name": "filled", "prop": "variant", "description": "Solid fill with an underline.", "whenToUse": "When you want more visual weight than outlined." }
+  ],
+  "states": ["default", "hover", "focus", "disabled", "error"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Collecting a short freeform value such as a name, email, or number.",
+      "Any single-line field inside a form."
+    ],
+    "whenNotToUse": [
+      { "scenario": "A conversational message box that sends on submit", "useInstead": "ChatInput" },
+      { "scenario": "Choosing from a fixed set of options", "useInstead": "Radio, Checkbox, or a select" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Always pass a label so the field is announced to assistive tech.",
+      "Use monospace only for code, IDs, or terminal-style values.",
+      "Surface validation through error and helperText together."
+    ],
+    "dont": [
+      "Use a placeholder as the only label.",
+      "Hardcode border or focus colors; they come from tokens."
+    ]
+  },
+  "content": {
+    "voice": "Labels are short and literal. Helper text is plain and specific about what went wrong.",
+    "maxLength": null,
+    "rules": ["Label in sentence case.", "Error text names the fix, not just the failure."]
+  },
+  "tokensUsed": [
+    { "token": "typography.primitive.fontFamily.sans", "usage": "Value font in the default mode." },
+    { "token": "typography.primitive.fontFamily.mono", "usage": "Value font when monospace is set, and the label font." },
+    { "token": "typography.primitive.fontSize.sm", "usage": "Label size." },
+    { "token": "color.semantic.bg.surface", "usage": "Field fill, at half alpha resting and full on focus." },
+    { "token": "radius.semantic.md", "usage": "Field corner radius." },
+    { "token": "elevation.semantic.focus_ring", "usage": "Glow applied on focus." },
+    { "token": "color.semantic.border.subtle", "usage": "Resting outline color." },
+    { "token": "color.semantic.border.highlight", "usage": "Outline color on hover." },
+    { "token": "color.semantic.action.primary", "usage": "Outline and label color on focus." },
+    { "token": "color.semantic.text.primary", "usage": "Entered value color." },
+    { "token": "color.semantic.text.secondary", "usage": "Resting label color." },
+    { "token": "spacing.primitive.scale.3", "usage": "Vertical field padding." },
+    { "token": "spacing.primitive.scale.4", "usage": "Horizontal field padding." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Focusable in DOM order.", "Standard text editing keys apply."],
+    "aria": ["The label is associated with the field via MUI.", "error sets aria-invalid; helperText is linked as the description."],
+    "contrast": "Value and label clear 4.5:1 against the field fill; the focus ring is visible against the background.",
+    "focus": "Focus applies the token focus ring and shifts the outline and label to the action color."
+  },
+  "examples": [
+    { "title": "Labeled field", "code": "<Input label=\"Email\" value={email} onChange={onChange} />" },
+    { "title": "Monospace ID field", "code": "<Input label=\"Case ID\" monospace helperText=\"Format: UM-0000\" />" }
+  ],
+  "related": [
+    { "component": "ChatInput", "whenToChoose": "Use ChatInput for a send-on-submit message box; Input is the general form field." }
+  ]
+}

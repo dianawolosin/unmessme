@@ -1,0 +1,137 @@
+{
+  "component": "Text",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "Semantic typography that maps 1:1 to the type token ramp.",
+  "purpose": "All readable copy. Reach for Text instead of raw Typography or CSS font sizes so roles stay on-token.",
+  "import": "import { Text } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "glyph",
+      "description": "The text node styled by its role."
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'button' | 'caption' | 'overline' | 'tag'",
+      "required": false,
+      "default": "body1",
+      "options": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "body1",
+        "body2",
+        "button",
+        "caption",
+        "overline",
+        "tag"
+      ],
+      "description": "Semantic type role from the token ramp."
+    },
+    {
+      "name": "weight",
+      "type": "'regular' | 'medium' | 'semibold' | 'bold'",
+      "required": false,
+      "default": null,
+      "options": [
+        "regular",
+        "medium",
+        "semibold",
+        "bold"
+      ],
+      "description": "Optional weight override."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Optional color override; default is text.primary."
+    },
+    {
+      "name": "children",
+      "type": "React.ReactNode",
+      "required": true,
+      "default": null,
+      "options": [],
+      "description": "The copy."
+    }
+  ],
+  "variants": [
+    {
+      "name": "h1",
+      "prop": "variant",
+      "description": "Largest editorial headline.",
+      "whenToUse": "Landing heroes."
+    },
+    {
+      "name": "body1",
+      "prop": "variant",
+      "description": "Default reading size.",
+      "whenToUse": "Most body copy."
+    }
+  ],
+  "states": [
+    "default"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Any on-screen copy that needs a type role."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Interactive labels that are also actions",
+        "useInstead": "Button or Tab"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Pick the role that matches hierarchy, not a visual guess.",
+      "Keep color on semantic text tokens."
+    ],
+    "dont": [
+      "Set fontSize in sx; change the variant instead."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "typography.semantic.*",
+      "usage": "Each variant resolves font, size, weight, line height."
+    },
+    {
+      "token": "color.semantic.text.primary",
+      "usage": "Default color."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "N/A."
+    ],
+    "aria": [
+      "Use real heading levels that match the page outline."
+    ],
+    "contrast": "Body text at least 4.5:1; large text at least 3:1.",
+    "focus": "N/A."
+  },
+  "examples": [
+    {
+      "title": "Body",
+      "code": "<Text variant=\"body1\">Tell us the mess.</Text>"
+    }
+  ],
+  "related": [
+    {
+      "component": "Tag",
+      "whenToChoose": "Tag for chip labels; Text variant tag for inline type role only."
+    }
+  ]
+}

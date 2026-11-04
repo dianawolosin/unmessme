@@ -1,0 +1,8 @@
+---
+description: UnmessMe ethical and safety guardrails. Points at constraints.md.
+alwaysApply: true
+---
+
+Obey the **Ethical guardrails** section in `constraints.md`.
+
+That file is the rail. Do not duplicate the checklist here.

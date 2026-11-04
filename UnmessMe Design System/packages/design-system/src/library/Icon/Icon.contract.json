@@ -1,0 +1,100 @@
+{
+  "component": "Icon",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A size and color wrapper for SVG icons so they stay on-token.",
+  "purpose": "Wrap any SVG so size and color resolve from the system. Do not drop raw SVGs with hardcoded fills into screens.",
+  "import": "import { Icon } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "svg",
+      "description": "The child SVG, sized and colored by the wrapper."
+    }
+  ],
+  "props": [
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg' | 'xl'",
+      "required": false,
+      "default": "md",
+      "options": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "description": "Icon box size in px via the size map."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Semantic token color string for the fill."
+    },
+    {
+      "name": "children",
+      "type": "React.ReactNode",
+      "required": true,
+      "default": null,
+      "options": [],
+      "description": "The SVG glyph."
+    }
+  ],
+  "variants": [],
+  "states": [
+    "default"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Any glyph inside buttons, lists, or empty states."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Complex illustrations",
+        "useInstead": "a dedicated illustration asset"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Pass a semantic token color.",
+      "Give meaning via adjacent text or aria-label on the parent."
+    ],
+    "dont": [
+      "Hardcode fill hex on the SVG."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.text.primary",
+      "usage": "Default glyph color when set."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Decorative icons are not focusable."
+    ],
+    "aria": [
+      "If the icon alone carries meaning, set aria-label on the interactive parent.",
+      "Decorative icons use aria-hidden."
+    ],
+    "contrast": "Glyph against background holds at least 3:1.",
+    "focus": "N/A on the icon itself."
+  },
+  "examples": [
+    {
+      "title": "Sized glyph",
+      "code": "<Icon size=\"md\" color={tokens.color.semantic.text.secondary}>{svg}</Icon>"
+    }
+  ],
+  "related": [
+    {
+      "component": "Button",
+      "whenToChoose": "Icon-only actions still need a Button with aria-label."
+    }
+  ]
+}

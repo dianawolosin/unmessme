@@ -1,0 +1,67 @@
+{
+  "component": "TerminalReceipt",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A testimonial styled as a monospace thermal receipt with notched edges.",
+  "purpose": "Show social proof in the Digital Noir voice. Reach for it to present a quote with an author, role, and timestamp as a receipt or terminal log.",
+  "import": "import { TerminalReceipt } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "receipt paper", "description": "The dashed-border glass panel with notched top and bottom edges." },
+    { "part": "meta row", "description": "A receipt id and a timestamp along the top." },
+    { "part": "quote", "description": "The italic testimonial text." },
+    { "part": "attribution", "description": "Author name and role below a dashed divider." }
+  ],
+  "props": [
+    { "name": "text", "type": "string", "required": true, "default": null, "options": [], "description": "The testimonial quote." },
+    { "name": "author", "type": "string", "required": true, "default": null, "options": [], "description": "Name of the person quoted." },
+    { "name": "role", "type": "string", "required": false, "default": "UnmessMe User", "options": [], "description": "The author's role or title." },
+    { "name": "timestamp", "type": "string", "required": false, "default": "NOW", "options": [], "description": "A time label shown in the meta row." }
+  ],
+  "states": ["default"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Presenting a testimonial or social proof on a marketing surface.",
+      "Any short quote that fits the receipt or terminal-log motif."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Showing a functional, checkable plan or log", "useInstead": "PlanStepList" },
+      { "scenario": "A generic quote outside the receipt motif", "useInstead": "Surface" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep the quote to a sentence or two.",
+      "Provide a real author and role for credibility."
+    ],
+    "dont": [
+      "Put interactive controls inside; it is a display element.",
+      "Use it for functional logs the user acts on."
+    ]
+  },
+  "content": {
+    "voice": "Dry, deadpan testimonial; the UnmessMe satire.",
+    "maxLength": null,
+    "rules": ["Quote is one to two sentences."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.bg.glass_tint", "usage": "Receipt background." },
+    { "token": "color.semantic.border.subtle", "usage": "Dashed border and divider." },
+    { "token": "color.semantic.text.primary", "usage": "Quote and author text." },
+    { "token": "typography.primitive.fontFamily.mono", "usage": "Monospace typeface throughout." },
+    { "token": "radius.semantic.xs", "usage": "Near-sharp corners." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["No interactive elements."],
+    "aria": ["Notch decorations are non-content.", "The quote should read as a blockquote to assistive tech."],
+    "contrast": "Quote text holds at least 4.5:1; the meta row is decorative and may be lower.",
+    "focus": "No focus state; non-interactive."
+  },
+  "examples": [
+    { "title": "Testimonial", "code": "<TerminalReceipt text=\"UnmessMe turned the fire into a very nice spreadsheet.\" author=\"Sarah J.\" role=\"Creative Director\" timestamp=\"10:42 PM\" />" }
+  ],
+  "related": [
+    { "component": "PlanStepList", "whenToChoose": "PlanStepList is a functional, checkable log; TerminalReceipt is a static testimonial." }
+  ]
+}

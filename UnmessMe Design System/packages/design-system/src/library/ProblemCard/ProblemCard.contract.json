@@ -1,0 +1,78 @@
+{
+  "component": "ProblemCard",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A glass card for one logged problem, with title, tags, stress meter, and actions.",
+  "purpose": "Represent a single user case on the dashboard. Reach for it to show a logged mess in the active-cases grid, with an Unmess Me action that opens its plan.",
+  "import": "import { ProblemCard } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "surface", "description": "The tilted glass container with a subtle accent outline." },
+    { "part": "title", "description": "The problem, in the user's voice." },
+    { "part": "tags", "description": "One to five category Tags." },
+    { "part": "stress meter", "description": "A labeled bar showing the stress score out of ten." },
+    { "part": "actions", "description": "Secondary buttons: Unmess Me and optional View Plan." }
+  ],
+  "props": [
+    { "name": "title", "type": "string", "required": true, "default": null, "options": [], "description": "The problem title, generated from the user's input; keep under about 60 characters." },
+    { "name": "tags", "type": "string[]", "required": true, "default": null, "options": [], "description": "One to five free-form category tags." },
+    { "name": "stressScore", "type": "number", "required": false, "default": null, "options": [], "description": "Emotional weight on a 1 to 10 scale, shown as a labeled meter." },
+    { "name": "accent", "type": "'urgent' | 'analysis' | 'success' | 'neutral'", "required": false, "default": "urgent", "options": ["urgent", "analysis", "success", "neutral"], "description": "Accent color for the outline and meter fill." },
+    { "name": "onUnmess", "type": "() => void", "required": false, "default": null, "options": [], "description": "Primary flow handler; opens the plan for this case." },
+    { "name": "onViewPlan", "type": "() => void", "required": false, "default": null, "options": [], "description": "Optional handler for viewing an existing plan." },
+    { "name": "onClick", "type": "() => void", "required": false, "default": null, "options": [], "description": "Card click handler for navigating to detail; makes the card focusable." },
+    { "name": "ariaLabel", "type": "string", "required": false, "default": null, "options": [], "description": "Override for the auto-generated accessible label." },
+    { "name": "disabled", "type": "boolean", "required": false, "default": false, "options": [], "description": "Disabled state during async operations." }
+  ],
+  "states": ["default", "hover", "focus", "disabled"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Showing a logged problem or case in the dashboard grid.",
+      "Any card that carries tags, a stress read, and an Unmess action."
+    ],
+    "whenNotToUse": [
+      { "scenario": "A static marketing feature highlight", "useInstead": "FeatureCard" },
+      { "scenario": "A plain container with no case semantics", "useInstead": "Surface" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep the title short and in the user's own voice.",
+      "Use one to five tags.",
+      "Keep the card action secondary so a grid stays calm."
+    ],
+    "dont": [
+      "Signal stress by color alone; the labeled meter carries it.",
+      "Put a primary button on the card; competing emphasis breaks the wall."
+    ]
+  },
+  "content": {
+    "voice": "First-person, wry, human. The user's own framing of the mess.",
+    "maxLength": 60,
+    "rules": ["Title under about 60 characters.", "One to five tags."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.status.urgent", "usage": "Urgent accent outline and meter." },
+    { "token": "color.semantic.status.analysis", "usage": "Analysis accent." },
+    { "token": "color.semantic.status.success", "usage": "Success accent." },
+    { "token": "radius.semantic.lg", "usage": "Card corner radius." },
+    { "token": "elevation.semantic.card.rest", "usage": "Resting shadow." },
+    { "token": "elevation.semantic.card.focused", "usage": "Hover shadow." },
+    { "token": "typography.primitive.fontFamily.serif", "usage": "Title typeface." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["When clickable, the card is focusable and activatable.", "Action buttons are focusable and stop propagation."],
+    "aria": ["Renders role=article with an auto-generated label from title, tags, and stress.", "Action buttons carry explicit aria-labels."],
+    "contrast": "Title, tags, and meter hold at least 4.5:1 against the glass.",
+    "focus": "Visible focus when the card or its buttons are focused."
+  },
+  "examples": [
+    { "title": "Dashboard case", "code": "<ProblemCard title=\"Lots of debt, no assets, great personality.\" tags={['money','debt','avoidance']} stressScore={8} accent=\"urgent\" onUnmess={openPlan} />" }
+  ],
+  "related": [
+    { "component": "FeatureCard", "whenToChoose": "FeatureCard is a static marketing block; ProblemCard is an interactive case." },
+    { "component": "Tag", "whenToChoose": "ProblemCard renders Tags internally; use Tag directly for standalone labels." },
+    { "component": "PlanStepList", "whenToChoose": "The Unmess action opens a PlanStepList for the case." }
+  ]
+}

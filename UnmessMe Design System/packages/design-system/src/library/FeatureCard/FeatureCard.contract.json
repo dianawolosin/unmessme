@@ -1,0 +1,75 @@
+{
+  "component": "FeatureCard",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A glass showcase card for a single marketing feature, with icon, title, and description.",
+  "purpose": "Highlight one product feature in a bento grid on marketing surfaces. Reach for it instead of a raw Surface when the block is a titled, icon-led feature pitch.",
+  "import": "import { FeatureCard } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "surface", "description": "The glass container with an accent top-border glow." },
+    { "part": "icon", "description": "Optional accent-colored icon at the top." },
+    { "part": "title", "description": "The feature name, rendered as a heading." },
+    { "part": "description", "description": "One or two sentences of supporting copy." }
+  ],
+  "props": [
+    { "name": "title", "type": "string", "required": true, "default": null, "options": [], "description": "The feature name." },
+    { "name": "description", "type": "string", "required": true, "default": null, "options": [], "description": "Supporting copy for the feature." },
+    { "name": "icon", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Optional leading icon, tinted with the accent." },
+    { "name": "accent", "type": "'terracotta' | 'iris' | 'seafoam'", "required": false, "default": "seafoam", "options": ["terracotta", "iris", "seafoam"], "description": "Accent color, mapped to the status tokens (urgent, analysis, success)." },
+    { "name": "delay", "type": "number", "required": false, "default": 0, "options": [], "description": "Scroll-in animation delay in seconds, for staggering a grid." }
+  ],
+  "variants": [
+    { "name": "seafoam", "prop": "accent", "description": "Success-token accent.", "whenToUse": "Default calm feature." },
+    { "name": "iris", "prop": "accent", "description": "Analysis-token accent.", "whenToUse": "Analytical or thoughtful feature." },
+    { "name": "terracotta", "prop": "accent", "description": "Urgent-token accent.", "whenToUse": "Energetic or action feature." }
+  ],
+  "states": ["default", "hover"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Presenting a product feature in a marketing bento grid.",
+      "A titled block with an icon and a short pitch."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Showing an interactive user problem or case", "useInstead": "ProblemCard" },
+      { "scenario": "A plain container with no feature framing", "useInstead": "Surface" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep the title to a few words and the description to one or two sentences.",
+      "Stagger a grid with the delay prop for a calm cascade."
+    ],
+    "dont": [
+      "Put interactive controls inside; it is a display card.",
+      "Hardcode the accent color; use the accent prop."
+    ]
+  },
+  "content": {
+    "voice": "Satirical, confident marketing copy; the UnmessMe wink.",
+    "maxLength": null,
+    "rules": ["Title is a short noun phrase.", "Description is one to two sentences."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.status.success", "usage": "Seafoam accent." },
+    { "token": "color.semantic.status.analysis", "usage": "Iris accent." },
+    { "token": "color.semantic.status.urgent", "usage": "Terracotta accent." },
+    { "token": "elevation.semantic.card.focused", "usage": "Hover shadow." },
+    { "token": "typography.primitive.fontFamily.serif", "usage": "Title typeface." },
+    { "token": "typography.primitive.fontFamily.mono", "usage": "Description typeface." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["No interactive elements; nothing to tab to inside the card."],
+    "aria": ["Title renders as an h3 heading.", "A decorative icon should not carry meaning alone."],
+    "contrast": "Title and description hold at least 4.5:1 against the glass surface.",
+    "focus": "No focus state; the card is non-interactive."
+  },
+  "examples": [
+    { "title": "Feature block", "code": "<FeatureCard title=\"Panic to Plan\" description=\"Turn AHHHHHH into 3 actionable steps.\" icon={<Bolt />} accent=\"terracotta\" delay={0.3} />" }
+  ],
+  "related": [
+    { "component": "ProblemCard", "whenToChoose": "ProblemCard is an interactive case on the app surface; FeatureCard is a static marketing highlight." },
+    { "component": "Surface", "whenToChoose": "Surface is the raw glass container; FeatureCard adds the feature layout on top of it." }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "component": "Progress",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A linear or circular progress indicator for determinate and loading states.",
+  "purpose": "Show completion of a plan or an in-flight load. Prefer labeled meters for stress; Progress is for process.",
+  "import": "import { Progress } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "track",
+      "description": "The bar or circle track and fill."
+    }
+  ],
+  "props": [
+    {
+      "name": "type",
+      "type": "'linear' | 'circular'",
+      "required": false,
+      "default": "linear",
+      "options": [
+        "linear",
+        "circular"
+      ],
+      "description": "Shape of the indicator."
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "0 to 100. Omit for indeterminate loading."
+    },
+    {
+      "name": "color",
+      "type": "'primary' | 'urgent' | 'analysis'",
+      "required": false,
+      "default": "primary",
+      "options": [
+        "primary",
+        "urgent",
+        "analysis"
+      ],
+      "description": "Semantic fill color."
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "default": 24,
+      "options": [],
+      "description": "Pixel size for circular only."
+    }
+  ],
+  "variants": [
+    {
+      "name": "linear",
+      "prop": "type",
+      "description": "Horizontal bar.",
+      "whenToUse": "Plan completion and long-running steps."
+    },
+    {
+      "name": "circular",
+      "prop": "type",
+      "description": "Spinner or ring.",
+      "whenToUse": "Compact loading near a control."
+    }
+  ],
+  "states": [
+    "determinate",
+    "indeterminate"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Loading and completion of a process."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Showing emotional stress on a case",
+        "useInstead": "ProblemCard stress meter"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Announce progress to assistive tech when determinate."
+    ],
+    "dont": [
+      "Use Progress as decoration with no real process."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.action.primary",
+      "usage": "Primary fill."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Not focusable."
+    ],
+    "aria": [
+      "role=progressbar with aria-valuenow when determinate."
+    ],
+    "contrast": "Fill against track holds at least 3:1.",
+    "focus": "N/A."
+  },
+  "examples": [
+    {
+      "title": "Plan complete",
+      "code": "<Progress type=\"linear\" value={60} color=\"primary\" />"
+    }
+  ],
+  "related": [
+    {
+      "component": "PlanStepList",
+      "whenToChoose": "PlanStepList for step content; Progress for overall percent."
+    }
+  ]
+}

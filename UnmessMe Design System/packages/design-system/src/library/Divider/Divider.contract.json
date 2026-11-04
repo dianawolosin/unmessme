@@ -1,0 +1,110 @@
+{
+  "component": "Divider",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A hairline or dashed separator for sections and receipt aesthetics.",
+  "purpose": "Split regions visually. Use dashed for receipt tear-off moments in TerminalReceipt.",
+  "import": "import { Divider } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "line",
+      "description": "The horizontal or vertical rule."
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "'solid' | 'dashed'",
+      "required": false,
+      "default": "solid",
+      "options": [
+        "solid",
+        "dashed"
+      ],
+      "description": "Solid hairline or dashed tear-off."
+    },
+    {
+      "name": "intensity",
+      "type": "'subtle' | 'highlight' | 'bold'",
+      "required": false,
+      "default": "subtle",
+      "options": [
+        "subtle",
+        "highlight",
+        "bold"
+      ],
+      "description": "Border token intensity."
+    }
+  ],
+  "variants": [
+    {
+      "name": "solid",
+      "prop": "variant",
+      "description": "Quiet section break.",
+      "whenToUse": "Default sectioning."
+    },
+    {
+      "name": "dashed",
+      "prop": "variant",
+      "description": "Receipt tear-off.",
+      "whenToUse": "TerminalReceipt and playful plan breaks."
+    }
+  ],
+  "states": [
+    "default"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Separating stacked content.",
+      "Receipt-style breaks."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Creating layout structure that needs semantic grouping",
+        "useInstead": "Surface or section headings"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Prefer subtle intensity on dense screens."
+    ],
+    "dont": [
+      "Stack multiple dividers for spacing; use spacing tokens."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.border.subtle",
+      "usage": "Subtle intensity."
+    },
+    {
+      "token": "border.width.base",
+      "usage": "Line weight."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Decorative; not focusable."
+    ],
+    "aria": [
+      "Prefer role=separator when the break is meaningful."
+    ],
+    "contrast": "Line against surface remains visible but quiet.",
+    "focus": "N/A."
+  },
+  "examples": [
+    {
+      "title": "Receipt tear",
+      "code": "<Divider variant=\"dashed\" intensity=\"highlight\" />"
+    }
+  ],
+  "related": [
+    {
+      "component": "TerminalReceipt",
+      "whenToChoose": "TerminalReceipt composes dashed Dividers internally."
+    }
+  ]
+}

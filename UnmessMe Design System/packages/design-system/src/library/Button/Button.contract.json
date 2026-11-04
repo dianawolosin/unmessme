@@ -1,0 +1,67 @@
+{
+  "component": "Button",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A clickable control that triggers an action.",
+  "purpose": "Use for any discrete action. Reach for it instead of a styled div or a raw MUI Button so token discipline and the accessibility floor hold.",
+  "import": "import { Button } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "container", "description": "The pressable surface; carries the variant color and radius." },
+    { "part": "label", "description": "The action text; a verb-first phrase." }
+  ],
+  "props": [
+    { "name": "variant", "type": "'primary' | 'secondary' | 'ghost' | 'danger'", "required": false, "default": "primary", "options": ["primary", "secondary", "ghost", "danger"], "description": "Visual weight and intent of the action." },
+    { "name": "size", "type": "'sm' | 'md' | 'lg'", "required": false, "default": "md", "options": ["sm", "md", "lg"], "description": "Control size." },
+    { "name": "isFullWidth", "type": "boolean", "required": false, "default": false, "options": [], "description": "Stretch to the container width." },
+    { "name": "onClick", "type": "() => void", "required": false, "default": null, "options": [], "description": "Handler fired on activation." },
+    { "name": "children", "type": "React.ReactNode", "required": true, "default": null, "options": [], "description": "The button label." }
+  ],
+  "variants": [
+    { "name": "primary", "prop": "variant", "description": "Seafoam fill, highest weight.", "whenToUse": "The single main action on a surface." },
+    { "name": "secondary", "prop": "variant", "description": "Bordered, transparent fill.", "whenToUse": "Secondary actions that sit beside a primary, and actions inside cards." },
+    { "name": "ghost", "prop": "variant", "description": "No border or fill until hover.", "whenToUse": "Low-emphasis actions like nav or Back." },
+    { "name": "danger", "prop": "variant", "description": "Urgent-color fill.", "whenToUse": "Destructive actions the user should pause on." }
+  ],
+  "states": ["default", "hover", "focus", "disabled"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Triggering an action such as submit, open, or navigate.",
+      "The main call to action on a screen, as a single primary."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Navigating to another page as plain inline text", "useInstead": "a text link" },
+      { "scenario": "Toggling a binary setting", "useInstead": "Switch" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep one primary button per surface.",
+      "Use a verb-first label such as Unmess Me.",
+      "Give an icon-only button an aria-label."
+    ],
+    "dont": [
+      "Stack multiple primary buttons on one screen.",
+      "Hardcode a color; the variant sets it from tokens."
+    ]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.action.primary", "usage": "Background of the primary variant." },
+    { "token": "color.semantic.action.hover", "usage": "Background on hover." },
+    { "token": "radius.semantic.md", "usage": "Corner radius of the container." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Enter and Space activate the button.", "Focusable in DOM order."],
+    "aria": ["Renders a native button element.", "Icon-only buttons require aria-label."],
+    "contrast": "Label-to-fill contrast holds at least 4.5:1 in every variant.",
+    "focus": "Visible focus ring on keyboard focus."
+  },
+  "examples": [
+    { "title": "Primary CTA", "code": "<Button variant=\"primary\" size=\"lg\" onClick={onGo}>Unmess Me</Button>" },
+    { "title": "Icon-only FAB", "code": "<Button variant=\"primary\" aria-label=\"Log a new mess\">+</Button>" }
+  ],
+  "related": [
+    { "component": "Tag", "whenToChoose": "Use Tag for a non-action label; Button is for actions." }
+  ]
+}

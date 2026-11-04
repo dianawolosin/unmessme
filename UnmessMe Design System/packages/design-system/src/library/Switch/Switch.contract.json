@@ -1,0 +1,117 @@
+{
+  "component": "Switch",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A mechanical on/off toggle for immediate settings.",
+  "purpose": "Binary settings that take effect now. Not for multi-select forms.",
+  "import": "import { Switch } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "track",
+      "description": "The rail."
+    },
+    {
+      "part": "thumb",
+      "description": "The sliding knob."
+    }
+  ],
+  "props": [
+    {
+      "name": "color",
+      "type": "'primary' | 'secondary' | 'success' | 'default'",
+      "required": false,
+      "default": "primary",
+      "options": [
+        "primary",
+        "secondary",
+        "success",
+        "default"
+      ],
+      "description": "On-state color mapped to semantic tokens."
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Controlled on state."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "options": [],
+      "description": "Disabled state."
+    }
+  ],
+  "variants": [
+    {
+      "name": "primary",
+      "prop": "color",
+      "description": "Seafoam when on.",
+      "whenToUse": "Default settings toggles."
+    }
+  ],
+  "states": [
+    "default",
+    "checked",
+    "disabled",
+    "focus"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Settings that flip immediately."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Submitting a form choice",
+        "useInstead": "Checkbox"
+      },
+      {
+        "scenario": "Triggering a one-shot action",
+        "useInstead": "Button"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Label the setting clearly beside the switch."
+    ],
+    "dont": [
+      "Use Switch for destructive actions without confirmation."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.action.primary",
+      "usage": "On-state fill."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Space toggles.",
+      "Focusable in DOM order."
+    ],
+    "aria": [
+      "Native switch/checkbox semantics with an associated label."
+    ],
+    "contrast": "Thumb and track remain distinguishable at 3:1.",
+    "focus": "Visible focus ring on keyboard focus."
+  },
+  "examples": [
+    {
+      "title": "Setting",
+      "code": "<Switch color=\"primary\" checked={on} onChange={...} />"
+    }
+  ],
+  "related": [
+    {
+      "component": "Checkbox",
+      "whenToChoose": "Checkbox inside forms; Switch for settings."
+    }
+  ]
+}

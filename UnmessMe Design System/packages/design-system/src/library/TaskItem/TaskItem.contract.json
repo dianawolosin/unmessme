@@ -1,0 +1,82 @@
+{
+  "component": "TaskItem",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A single actionable step rendered as a checkable, editable log line.",
+  "purpose": "Use as one row inside a list of steps or tasks. It pairs a completion checkbox with the step text and optional edit and delete actions. Reach for it instead of hand-building a checkbox row so completion styling and token discipline stay consistent.",
+  "import": "import { TaskItem } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "container", "description": "A padded row surface that animates in and nudges right on hover." },
+    { "part": "drag handle", "description": "A grip glyph on the left; visual affordance only in this version." },
+    { "part": "checkbox", "description": "Toggles completion; turns the success color when checked." },
+    { "part": "text", "description": "The step label; strikes through and dims when completed." },
+    { "part": "actions", "description": "Edit and delete icon buttons, shown only when editable and not completed." }
+  ],
+  "props": [
+    { "name": "id", "type": "string", "required": true, "default": null, "options": [], "description": "Stable identifier passed back to every handler." },
+    { "name": "text", "type": "string", "required": true, "default": null, "options": [], "description": "The step label." },
+    { "name": "isCompleted", "type": "boolean", "required": false, "default": false, "options": [], "description": "Marks the step done; strikes and dims the row." },
+    { "name": "isEditable", "type": "boolean", "required": false, "default": false, "options": [], "description": "Reveals edit and delete actions when the step is not completed." },
+    { "name": "onToggle", "type": "(id: string) => void", "required": false, "default": null, "options": [], "description": "Fired when the checkbox is toggled." },
+    { "name": "onEdit", "type": "(id: string, newText: string) => void", "required": false, "default": null, "options": [], "description": "Fired when the edit action is used." },
+    { "name": "onDelete", "type": "(id: string) => void", "required": false, "default": null, "options": [], "description": "Fired when the delete action is used." }
+  ],
+  "variants": [],
+  "states": ["default", "hover", "completed", "editable"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "One row inside a checklist or a step-by-step plan.",
+      "A task the user can complete, and optionally edit or remove."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Rendering an ordered plan with numbering and structure", "useInstead": "PlanStepList" },
+      { "scenario": "A standalone binary setting with no list context", "useInstead": "Checkbox or Switch" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Provide a stable id, since every handler is keyed by it.",
+      "Let isCompleted drive the strike-through and dim rather than styling text yourself.",
+      "Compose several inside PlanStepList or a Stack, not in isolation."
+    ],
+    "dont": [
+      "Rely on the drag handle for reordering; it is visual only in this version.",
+      "Pass empty text; the row's accessible action labels are derived from it."
+    ]
+  },
+  "content": {
+    "voice": "Steps read as short imperative actions, verb first.",
+    "maxLength": null,
+    "rules": ["One action per item.", "Keep it to a single line where possible."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.bg.surface", "usage": "Row fill, at reduced alpha when completed." },
+    { "token": "color.semantic.border.subtle", "usage": "Resting border." },
+    { "token": "color.semantic.border.highlight", "usage": "Border and checkbox color on hover and rest." },
+    { "token": "border.width.base", "usage": "Border width." },
+    { "token": "border.style.solid", "usage": "Border style." },
+    { "token": "radius.semantic.sm", "usage": "Row corner radius." },
+    { "token": "color.semantic.status.success", "usage": "Checkbox color when checked." },
+    { "token": "color.semantic.status.urgent", "usage": "Delete action color on hover." },
+    { "token": "color.semantic.text.primary", "usage": "Text color when active." },
+    { "token": "color.semantic.text.secondary", "usage": "Edit and delete icon color." },
+    { "token": "color.semantic.text.disabled", "usage": "Drag handle color and text color when completed." },
+    { "token": "typography.semantic.body1.font", "usage": "Step text font." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["The checkbox toggles with Space.", "Edit and delete actions are reachable and activate with Enter or Space."],
+    "aria": ["The checkbox exposes checked state.", "Edit and delete icon buttons carry a row-specific aria-label (\"Edit step: <text>\" and \"Delete step: <text>\")."],
+    "contrast": "Active text clears 4.5:1; completed text is intentionally dimmed and should not carry information that dimming alone hides.",
+    "focus": "Every interactive control shows a visible focus ring."
+  },
+  "examples": [
+    { "title": "Basic step", "code": "<TaskItem id=\"1\" text=\"Reply to the landlord\" onToggle={onToggle} />" },
+    { "title": "Editable, incomplete", "code": "<TaskItem id=\"2\" text=\"Draft the email\" isEditable onEdit={onEdit} onDelete={onDelete} />" }
+  ],
+  "related": [
+    { "component": "PlanStepList", "whenToChoose": "Use PlanStepList to render a whole plan; TaskItem is the single row it composes." },
+    { "component": "Checkbox", "whenToChoose": "Use Checkbox for a lone toggle; TaskItem is a full list row with text and actions." }
+  ]
+}

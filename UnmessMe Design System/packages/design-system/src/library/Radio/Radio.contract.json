@@ -1,0 +1,114 @@
+{
+  "component": "Radio",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "An exclusive single-choice control with a filled circle.",
+  "purpose": "Pick exactly one option in a set. Pair with RadioGroup semantics from MUI.",
+  "import": "import { Radio } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "dot",
+      "description": "The outer ring and filled center when selected."
+    }
+  ],
+  "props": [
+    {
+      "name": "color",
+      "type": "'primary' | 'secondary' | 'success' | 'default'",
+      "required": false,
+      "default": "primary",
+      "options": [
+        "primary",
+        "secondary",
+        "success",
+        "default"
+      ],
+      "description": "Selected fill mapped to semantic tokens."
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Controlled selected state."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "options": [],
+      "description": "Disabled state."
+    }
+  ],
+  "variants": [
+    {
+      "name": "primary",
+      "prop": "color",
+      "description": "Seafoam selected fill.",
+      "whenToUse": "Default exclusive choices."
+    }
+  ],
+  "states": [
+    "default",
+    "checked",
+    "disabled",
+    "focus"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Choosing one of several mutually exclusive options."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Multi-select",
+        "useInstead": "Checkbox"
+      },
+      {
+        "scenario": "Immediate on/off setting",
+        "useInstead": "Switch"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Group radios under one legend.",
+      "Keep hit targets generous."
+    ],
+    "dont": [
+      "Use a single Radio without a group."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.action.primary",
+      "usage": "Primary selected fill."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Arrow keys move within the group.",
+      "Space selects."
+    ],
+    "aria": [
+      "Native radio semantics inside a radiogroup."
+    ],
+    "contrast": "Selected fill against surface holds at least 3:1.",
+    "focus": "Visible focus ring on keyboard focus."
+  },
+  "examples": [
+    {
+      "title": "Choice",
+      "code": "<Radio color=\"primary\" checked={v === 'a'} onChange={...} />"
+    }
+  ],
+  "related": [
+    {
+      "component": "Checkbox",
+      "whenToChoose": "Checkbox when more than one may be selected."
+    }
+  ]
+}

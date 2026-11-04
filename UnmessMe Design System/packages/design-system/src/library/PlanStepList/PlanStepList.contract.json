@@ -1,0 +1,68 @@
+{
+  "component": "PlanStepList",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A generated plan rendered as a list of checkable, editable steps.",
+  "purpose": "Show the plan a mess unpacks into. Reach for it inside the plan modal to render ordered steps the user can complete; it composes TaskItem for each step.",
+  "import": "import { PlanStepList } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "intro", "description": "Optional friendly framing line above the steps." },
+    { "part": "steps", "description": "A stack of TaskItem rows, each checkable." },
+    { "part": "empty state", "description": "A quiet message when there are no steps." }
+  ],
+  "props": [
+    { "name": "steps", "type": "PlanStep[]", "required": true, "default": null, "options": [], "description": "The steps, each { id, text, isCompleted }." },
+    { "name": "onToggleStep", "type": "(id: string) => void", "required": true, "default": null, "options": [], "description": "Called when a step is checked or unchecked." },
+    { "name": "intro", "type": "string", "required": false, "default": null, "options": [], "description": "Optional friendly intro line above the steps." },
+    { "name": "onEditStep", "type": "(id: string, newText: string) => void", "required": false, "default": null, "options": [], "description": "Optional handler for editing a step's text." },
+    { "name": "onDeleteStep", "type": "(id: string) => void", "required": false, "default": null, "options": [], "description": "Optional handler for removing a step." }
+  ],
+  "states": ["default", "empty"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Rendering a generated plan as ordered, checkable steps.",
+      "Inside the plan modal opened from a ProblemCard."
+    ],
+    "whenNotToUse": [
+      { "scenario": "A static, non-interactive bulleted list", "useInstead": "a plain list" },
+      { "scenario": "A single standalone task row", "useInstead": "TaskItem" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep steps small and doable, one action each.",
+      "Write an intro that sets a gentle, one-thing-at-a-time tone."
+    ],
+    "dont": [
+      "Pack multiple actions into one step.",
+      "Use it for content the user cannot act on."
+    ]
+  },
+  "content": {
+    "voice": "Encouraging, concrete, one small action per step.",
+    "maxLength": null,
+    "rules": ["Each step is a single doable action.", "Intro is one sentence."]
+  },
+  "tokensUsed": [
+    { "token": "typography.primitive.fontFamily.serif", "usage": "Intro typeface." },
+    { "token": "typography.primitive.fontFamily.mono", "usage": "Empty-state typeface." },
+    { "token": "color.semantic.text.primary", "usage": "Intro color." },
+    { "token": "color.semantic.text.disabled", "usage": "Empty-state color." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Each step's checkable control is focusable and toggled with Space or Enter."],
+    "aria": ["Steps read as a list; each TaskItem exposes its completed state.", "Completion is conveyed by more than color."],
+    "contrast": "Step text and intro hold at least 4.5:1; completed steps stay legible.",
+    "focus": "Visible focus on each step control."
+  },
+  "examples": [
+    { "title": "Plan in a modal", "code": "<PlanStepList intro={activeCase.intro} steps={activeCase.plan} onToggleStep={toggle} />" }
+  ],
+  "related": [
+    { "component": "TaskItem", "whenToChoose": "TaskItem is one step row; PlanStepList sequences many of them." },
+    { "component": "ProblemCard", "whenToChoose": "A ProblemCard's Unmess action opens the PlanStepList for that case." },
+    { "component": "Dialog", "whenToChoose": "PlanStepList is typically rendered inside a Dialog." }
+  ]
+}

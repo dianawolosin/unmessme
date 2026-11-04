@@ -1,0 +1,6 @@
+{
+  "name": "unmessme-design-system",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "_schema_note": "Scaffolding stub. Workspace root for the design-system + mcp-server packages."
+}

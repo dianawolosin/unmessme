@@ -1,0 +1,17 @@
+{
+  "component": "LandingHero",
+  "status": "stable",
+  "summary": "",
+  "purpose": "",
+  "import": "import { LandingHero } from '@unmessme/design-system';",
+  "props": [
+    { "name": "headline", "type": "string", "required": true, "default": null, "options": [], "description": "" },
+    { "name": "subheadline", "type": "string", "required": false, "default": null, "options": [], "description": "" },
+    { "name": "ctaText", "type": "string", "required": false, "default": null, "options": [], "description": "" },
+    { "name": "onCtaClick", "type": "() => void", "required": false, "default": null, "options": [], "description": "" }
+  ],
+  "tokensUsed": [],
+  "accessibility": [],
+  "usage": [],
+  "related": ["Button"]
+}

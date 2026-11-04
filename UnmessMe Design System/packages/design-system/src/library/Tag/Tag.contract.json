@@ -1,0 +1,76 @@
+{
+  "component": "Tag",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A small lowercase label for a category, tag, or filter.",
+  "purpose": "Use to mark a piece of content with a free-form category or to offer a filter. Reach for it instead of a raw MUI Chip so the masking-tape aesthetic and semantic colors stay on-system.",
+  "import": "import { Tag } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "container", "description": "The tape-styled chip; near-sharp corners, optional slight rotation." },
+    { "part": "label", "description": "The lowercase text." }
+  ],
+  "props": [
+    { "name": "label", "type": "string", "required": true, "default": null, "options": [], "description": "The tag text; rendered lowercase." },
+    { "name": "variant", "type": "'solid' | 'outline' | 'ghost'", "required": false, "default": "solid", "options": ["solid", "outline", "ghost"], "description": "Fill treatment of the tag." },
+    { "name": "color", "type": "'neutral' | 'brand' | 'urgent' | 'analysis' | 'success'", "required": false, "default": "neutral", "options": ["neutral", "brand", "urgent", "analysis", "success"], "description": "Semantic color, mapped to the status and action tokens." },
+    { "name": "tape", "type": "boolean", "required": false, "default": true, "options": [], "description": "Apply the slight tape-like rotation on solid tags." },
+    { "name": "selected", "type": "boolean", "required": false, "default": false, "options": [], "description": "Selected state, for filter usage." },
+    { "name": "size", "type": "'sm' | 'md'", "required": false, "default": "md", "options": ["sm", "md"], "description": "Tag size, strictly mapped to layout-height tokens." }
+  ],
+  "variants": [
+    { "name": "solid", "prop": "variant", "description": "Low-opacity color fill with a matching border.", "whenToUse": "Default content tags on a card or the wall of worries." },
+    { "name": "outline", "prop": "variant", "description": "Transparent fill, colored border.", "whenToUse": "Filter chips and section headers where the tag should read as quieter." },
+    { "name": "ghost", "prop": "variant", "description": "Text only, no border.", "whenToUse": "Dense contexts where borders would add noise." }
+  ],
+  "states": ["default", "selected"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Labeling content with a free-form category such as money, guilt, avoidance.",
+      "Offering a filter the user can select."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Triggering an action", "useInstead": "Button" },
+      { "scenario": "Showing a numeric count or status dot", "useInstead": "Badge" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep labels short, one or two words.",
+      "Use the semantic color prop, not a hardcoded value.",
+      "Limit a card to about five tags."
+    ],
+    "dont": [
+      "Use Tag as a clickable action.",
+      "Capitalize labels; the component lowercases them by design."
+    ]
+  },
+  "content": {
+    "voice": "Plain, lowercase, human. Real worries, not clinical categories.",
+    "maxLength": 24,
+    "rules": ["One or two words.", "Lowercase."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.status.urgent", "usage": "Accent for the urgent color." },
+    { "token": "color.semantic.status.analysis", "usage": "Accent for the analysis color." },
+    { "token": "color.semantic.status.success", "usage": "Accent for the success color." },
+    { "token": "color.semantic.action.primary", "usage": "Accent for the brand color." },
+    { "token": "typography.semantic.tag", "usage": "Font, size, and weight of the label." },
+    { "token": "radius.semantic.xs", "usage": "Near-sharp corner radius." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Non-interactive by default; not in the tab order unless made selectable."],
+    "aria": ["Purely decorative tags need no role.", "Do not encode meaning in color alone; the label carries it."],
+    "contrast": "Label-to-background contrast holds at least 4.5:1 in every color.",
+    "focus": "No focus state unless used as an interactive filter."
+  },
+  "examples": [
+    { "title": "Content tag", "code": "<Tag label=\"money\" color=\"urgent\" />" },
+    { "title": "Filter chip", "code": "<Tag label=\"Work\" color=\"analysis\" variant=\"outline\" selected />" }
+  ],
+  "related": [
+    { "component": "Badge", "whenToChoose": "Use Badge for a count or status indicator; Tag is for a category label." },
+    { "component": "Button", "whenToChoose": "Use Button when selecting the tag should perform an action." }
+  ]
+}

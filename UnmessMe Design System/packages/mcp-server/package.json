@@ -1,0 +1,18 @@
+{
+  "name": "@unmessme/mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UnmessMe MCP: serves tokens.json and component *.contract.json live from the design system package.",
+  "author": "Diana Wolosin <dianawolosin@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bin": {
+    "unmessme-mcp": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  }
+}

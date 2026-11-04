@@ -1,0 +1,65 @@
+{
+  "component": "Dialog",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A modal window on a glass surface with an optional title and actions.",
+  "purpose": "Present focused content or a decision on top of the page. Reach for it instead of a raw MUI Dialog so the glass aesthetic, backdrop blur, and tokens hold.",
+  "import": "import { Dialog } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "backdrop", "description": "A blurred, tinted scrim behind the modal." },
+    { "part": "surface", "description": "The floating glass panel." },
+    { "part": "title", "description": "Optional heading at the top." },
+    { "part": "content", "description": "The modal body, rendered from children." },
+    { "part": "actions", "description": "Optional footer for Button atoms." }
+  ],
+  "props": [
+    { "name": "children", "type": "React.ReactNode", "required": true, "default": null, "options": [], "description": "The modal body content." },
+    { "name": "title", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Optional dialog title." },
+    { "name": "actions", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Optional action buttons, usually Button atoms." },
+    { "name": "open", "type": "boolean", "required": true, "default": null, "options": [], "description": "Whether the dialog is shown (from MUI DialogProps)." },
+    { "name": "onClose", "type": "() => void", "required": false, "default": null, "options": [], "description": "Called on backdrop click or Escape (from MUI DialogProps)." }
+  ],
+  "states": ["open", "closed"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "A focused modal for a decision, a detail view, or a short flow.",
+      "Any overlay that should trap focus and dim the page."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Asking one required structuring question with fixed options", "useInstead": "ClarifyingDialog" },
+      { "scenario": "A transient, non-blocking confirmation", "useInstead": "a toast (out of system)" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Give the dialog a title so it has an accessible name.",
+      "Put actions in the actions slot as Button atoms."
+    ],
+    "dont": [
+      "Nest dialogs.",
+      "Use a dialog for content that belongs inline on the page."
+    ]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.bg.backdrop", "usage": "Backdrop scrim color." },
+    { "token": "effect.blur.sm", "usage": "Backdrop blur amount." },
+    { "token": "typography.semantic.h4", "usage": "Title type role." },
+    { "token": "typography.semantic.body1", "usage": "Content type role." },
+    { "token": "color.semantic.text.primary", "usage": "Title color." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Escape closes when onClose is provided.", "Focus is trapped inside while open and restored on close."],
+    "aria": ["Renders a modal dialog role.", "The title provides the accessible name; pass one, or set aria-label."],
+    "contrast": "Title and content hold at least 4.5:1 against the glass panel.",
+    "focus": "Focus moves into the dialog on open and returns to the trigger on close."
+  },
+  "examples": [
+    { "title": "Plan modal", "code": "<Dialog open={open} onClose={close} title={activeCase.title} actions={<Button variant=\"secondary\" size=\"sm\" onClick={close}>Close</Button>}>{body}</Dialog>" }
+  ],
+  "related": [
+    { "component": "ClarifyingDialog", "whenToChoose": "ClarifyingDialog is a specialized single-question modal built on Dialog." },
+    { "component": "Surface", "whenToChoose": "Surface is the glass panel without the modal behavior." }
+  ]
+}

@@ -1,0 +1,9 @@
+---
+description: UnmessMe token discipline. Points at constraints.md; does not copy token values.
+globs: ["**/*.tsx", "**/*.css", "**/*.html"]
+alwaysApply: false
+---
+
+Obey the **Token discipline** section in `constraints.md`.
+
+Query the UnmessMe MCP (`get_tokens`) for live values. Do not restate hex codes or token trees here.

@@ -1,0 +1,96 @@
+{
+  "component": "Tooltip",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "Short hover and focus micro-copy that explains a control.",
+  "purpose": "Clarify icon-only or dense controls. Keep the title short; do not hide required instructions only in a tooltip.",
+  "import": "import { Tooltip } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "trigger",
+      "description": "The wrapped child."
+    },
+    {
+      "part": "bubble",
+      "description": "The short explanation on hover or focus."
+    }
+  ],
+  "props": [
+    {
+      "name": "title",
+      "type": "React.ReactNode",
+      "required": true,
+      "default": null,
+      "options": [],
+      "description": "The tooltip copy."
+    },
+    {
+      "name": "children",
+      "type": "React.ReactElement",
+      "required": true,
+      "default": null,
+      "options": [],
+      "description": "The trigger element."
+    }
+  ],
+  "variants": [],
+  "states": [
+    "default",
+    "open"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Explaining an icon-only control.",
+      "Adding a short hint on dense UI."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Long help or required reading",
+        "useInstead": "Inline Text or Dialog"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep titles under about one short sentence.",
+      "Ensure the trigger is keyboard focusable."
+    ],
+    "dont": [
+      "Put critical legal copy only in a tooltip."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.bg.surface",
+      "usage": "Bubble background."
+    },
+    {
+      "token": "typography.semantic.caption",
+      "usage": "Bubble type."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Shows on focus as well as hover."
+    ],
+    "aria": [
+      "Uses the trigger's accessible name; title is supplemental."
+    ],
+    "contrast": "Bubble text against bubble fill holds at least 4.5:1.",
+    "focus": "Trigger shows visible focus; tooltip follows."
+  },
+  "examples": [
+    {
+      "title": "Icon hint",
+      "code": "<Tooltip title=\"Log a new mess\"><Button aria-label=\"Log a new mess\">+</Button></Tooltip>"
+    }
+  ],
+  "related": [
+    {
+      "component": "Dialog",
+      "whenToChoose": "Dialog for longer explanations that need a decision."
+    }
+  ]
+}

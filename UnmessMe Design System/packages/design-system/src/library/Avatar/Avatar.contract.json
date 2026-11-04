@@ -1,0 +1,123 @@
+{
+  "component": "Avatar",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A circular identity mark for a person, with optional active ring.",
+  "purpose": "Show who owns a case or who is speaking. Use instead of a raw image so size and the active ring stay on-token.",
+  "import": "import { Avatar } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "image",
+      "description": "The photo or initials face."
+    },
+    {
+      "part": "ring",
+      "description": "Optional active border when the person is in session."
+    }
+  ],
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Image URL."
+    },
+    {
+      "name": "children",
+      "type": "React.ReactNode",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Fallback initials when no image."
+    },
+    {
+      "name": "size",
+      "type": "'sm' | 'md' | 'lg' | 'xl'",
+      "required": false,
+      "default": "md",
+      "options": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "description": "Avatar size mapped to spacing tokens."
+    },
+    {
+      "name": "active",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "options": [],
+      "description": "Draw the active status ring."
+    }
+  ],
+  "variants": [
+    {
+      "name": "active",
+      "prop": "active",
+      "description": "Seafoam ring around the face.",
+      "whenToUse": "The person currently in the session."
+    }
+  ],
+  "states": [
+    "default",
+    "active"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Identifying a person next to a case, plan, or chat turn."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Decorating a marketing feature block",
+        "useInstead": "FeatureCard imagery"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Prefer initials when no photo is available.",
+      "Use the size prop, not a hardcoded width."
+    ],
+    "dont": [
+      "Hardcode a border color for the active ring."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.action.primary",
+      "usage": "Active ring."
+    },
+    {
+      "token": "spacing.semantic.layout.*",
+      "usage": "Size ramp."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Not interactive by default."
+    ],
+    "aria": [
+      "Provide alt text on the image, or aria-label on the avatar when it conveys meaning."
+    ],
+    "contrast": "Initials against the fill hold at least 4.5:1.",
+    "focus": "N/A unless made interactive by the parent."
+  },
+  "examples": [
+    {
+      "title": "Active user",
+      "code": "<Avatar size=\"md\" active>DW</Avatar>"
+    }
+  ],
+  "related": [
+    {
+      "component": "Badge",
+      "whenToChoose": "Badge for counts or status dots; Avatar for identity."
+    }
+  ]
+}

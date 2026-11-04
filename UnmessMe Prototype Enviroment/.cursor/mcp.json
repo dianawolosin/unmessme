@@ -1,0 +1,11 @@
+{
+  "_schema_note": "Connects this prototype to the UnmessMe MCP in the sibling design-system unit. Serves tokens.json + *.contract.json live over stdio.",
+  "mcpServers": {
+    "unmessme": {
+      "command": "node",
+      "args": [
+        "../UnmessMe Design System/packages/mcp-server/src/index.js"
+      ]
+    }
+  }
+}

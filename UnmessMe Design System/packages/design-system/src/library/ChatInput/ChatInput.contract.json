@@ -1,0 +1,68 @@
+{
+  "component": "ChatInput",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A large conversational input for logging a mess, with voice toggle and send.",
+  "purpose": "The primary intake on the app surface. Reach for it when the user should describe something in their own words; it composes the Input atom and adds submit and voice affordances.",
+  "import": "import { ChatInput } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "field", "description": "A multiline, underline-only text field in serif type." },
+    { "part": "voice button", "description": "Toggles a listening state for voice input." },
+    { "part": "send button", "description": "Appears once there is text; submits the entry." },
+    { "part": "listening indicator", "description": "A pulsing dot and label shown while listening." }
+  ],
+  "props": [
+    { "name": "onSubmit", "type": "(text: string) => void", "required": true, "default": null, "options": [], "description": "Called with the trimmed text when the user submits." },
+    { "name": "placeholder", "type": "string", "required": false, "default": "What's weighing on you today?", "options": [], "description": "Prompt text shown when empty." },
+    { "name": "isThinking", "type": "boolean", "required": false, "default": false, "options": [], "description": "Loading state while the system responds; disables input." },
+    { "name": "disabled", "type": "boolean", "required": false, "default": false, "options": [], "description": "Disables the field and its buttons." }
+  ],
+  "states": ["default", "focus", "listening", "thinking", "disabled"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "The main conversational intake where the user logs a mess in their own words.",
+      "Any free-text entry that should feel like talking to a friend."
+    ],
+    "whenNotToUse": [
+      { "scenario": "A short, structured form field", "useInstead": "Input" },
+      { "scenario": "Choosing among a few fixed options", "useInstead": "ClarifyingDialog" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep one ChatInput as the focal intake on the surface.",
+      "Write a warm, first-person placeholder."
+    ],
+    "dont": [
+      "Use it for rigid structured data; that belongs in Input.",
+      "Submit on Enter+Shift; that inserts a newline by design."
+    ]
+  },
+  "content": {
+    "voice": "Warm, conversational, first-person prompts.",
+    "maxLength": null,
+    "rules": ["Placeholder is a gentle question."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.action.primary", "usage": "Send button and focus underline." },
+    { "token": "color.semantic.action.hover", "usage": "Send button hover." },
+    { "token": "color.semantic.status.urgent", "usage": "Listening indicator." },
+    { "token": "color.semantic.border.subtle", "usage": "Resting underline." },
+    { "token": "typography.primitive.fontFamily.serif", "usage": "Field typeface." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Enter submits.", "Shift+Enter inserts a newline.", "Voice and send buttons are focusable."],
+    "aria": ["Voice button has an aria-label that reflects listening state.", "Send button has aria-label Send message."],
+    "contrast": "Entered text and placeholder meet contrast against the canvas; the placeholder stays legible.",
+    "focus": "Focus-within moves the underline to the primary color."
+  },
+  "examples": [
+    { "title": "Dashboard intake", "code": "<ChatInput onSubmit={handleSubmit} placeholder=\"What's weighing on you right now?\" />" }
+  ],
+  "related": [
+    { "component": "Input", "whenToChoose": "Input is the base atom for structured fields; ChatInput is the conversational intake built on it." },
+    { "component": "ClarifyingDialog", "whenToChoose": "Use ClarifyingDialog for a fixed-choice follow-up after intake." }
+  ]
+}

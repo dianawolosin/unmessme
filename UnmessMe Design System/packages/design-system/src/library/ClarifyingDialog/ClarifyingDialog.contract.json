@@ -1,0 +1,69 @@
+{
+  "component": "ClarifyingDialog",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A focused modal that asks one clarifying question with a few choice buttons.",
+  "purpose": "Ask a single structuring question before filing the user's input. Reach for it after intake when one choice sharpens the plan; it composes Dialog and full-width Buttons.",
+  "import": "import { ClarifyingDialog } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "modal", "description": "A centered glass Dialog." },
+    { "part": "question", "description": "The single question as a centered heading." },
+    { "part": "options", "description": "A vertical stack of full-width choice buttons." },
+    { "part": "skip", "description": "An optional ghost Skip action when dismissal is allowed." }
+  ],
+  "props": [
+    { "name": "open", "type": "boolean", "required": true, "default": null, "options": [], "description": "Whether the dialog is shown." },
+    { "name": "question", "type": "string", "required": true, "default": null, "options": [], "description": "The single clarifying question." },
+    { "name": "options", "type": "ClarifyingOption[]", "required": false, "default": [], "options": [], "description": "Choices, each { id, label }." },
+    { "name": "onSelectOption", "type": "(optionId: string) => void", "required": true, "default": null, "options": [], "description": "Called with the chosen option id." },
+    { "name": "onClose", "type": "() => void", "required": false, "default": null, "options": [], "description": "Optional; when set, a Skip action appears and dismissal is allowed." }
+  ],
+  "states": ["open", "closed"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Asking exactly one question that structures the user's input.",
+      "A short, fixed set of choices, roughly two to four."
+    ],
+    "whenNotToUse": [
+      { "scenario": "A general modal for arbitrary content or a flow", "useInstead": "Dialog" },
+      { "scenario": "Free-text entry", "useInstead": "ChatInput" },
+      { "scenario": "A long form with many fields", "useInstead": "a dedicated form" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Ask one question at a time.",
+      "Keep option labels short and parallel in structure."
+    ],
+    "dont": [
+      "Cram multiple questions into one dialog.",
+      "Offer more than about four options."
+    ]
+  },
+  "content": {
+    "voice": "Direct, warm, a single plain question. Options in the user's voice.",
+    "maxLength": null,
+    "rules": ["One question.", "Two to four parallel option labels."]
+  },
+  "tokensUsed": [
+    { "token": "typography.primitive.fontFamily.serif", "usage": "Question typeface." },
+    { "token": "typography.primitive.fontFamily.mono", "usage": "Option and Skip label typeface." },
+    { "token": "color.semantic.text.primary", "usage": "Question color." },
+    { "token": "radius.semantic.md", "usage": "Option button radius." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Options are focusable buttons, activatable with Enter or Space.", "Escape triggers Skip when onClose is set."],
+    "aria": ["Inherits the modal dialog role from Dialog.", "The question is the accessible name."],
+    "contrast": "Question and options hold at least 4.5:1 against the glass.",
+    "focus": "Focus is trapped in the modal and returns to the trigger on close."
+  },
+  "examples": [
+    { "title": "One clarifying question", "code": "<ClarifyingDialog open={open} question=\"Is this mostly time pressure, or emotional weight?\" options={opts} onSelectOption={handleSelect} onClose={close} />" }
+  ],
+  "related": [
+    { "component": "Dialog", "whenToChoose": "Dialog is the general modal; ClarifyingDialog is the one-question specialization." },
+    { "component": "ChatInput", "whenToChoose": "ChatInput gathers free text; ClarifyingDialog narrows it with a fixed choice." }
+  ]
+}

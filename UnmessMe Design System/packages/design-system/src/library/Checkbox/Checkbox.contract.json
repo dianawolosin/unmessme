@@ -1,0 +1,116 @@
+{
+  "component": "Checkbox",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A square binary choice control with mechanical terminal styling.",
+  "purpose": "Multi-select or agree/confirm choices. Use instead of a raw MUI Checkbox so colors stay semantic.",
+  "import": "import { Checkbox } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "box",
+      "description": "The square control that fills when checked."
+    }
+  ],
+  "props": [
+    {
+      "name": "color",
+      "type": "'primary' | 'secondary' | 'success' | 'default'",
+      "required": false,
+      "default": "primary",
+      "options": [
+        "primary",
+        "secondary",
+        "success",
+        "default"
+      ],
+      "description": "Checked fill mapped to semantic tokens."
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Controlled checked state."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "options": [],
+      "description": "Disabled state."
+    }
+  ],
+  "variants": [
+    {
+      "name": "primary",
+      "prop": "color",
+      "description": "Seafoam checked fill.",
+      "whenToUse": "Default affirmative choices."
+    }
+  ],
+  "states": [
+    "default",
+    "checked",
+    "disabled",
+    "focus"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Selecting multiple items.",
+      "Confirming a non-exclusive option."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Choosing exactly one of several options",
+        "useInstead": "Radio"
+      },
+      {
+        "scenario": "Toggling a setting on or off",
+        "useInstead": "Switch"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Pair with a visible label.",
+      "Keep the hit target at least 48px via padding or wrapper."
+    ],
+    "dont": [
+      "Hardcode the checked color."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.action.primary",
+      "usage": "Primary checked fill."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Space toggles.",
+      "Focusable in DOM order."
+    ],
+    "aria": [
+      "Native checkbox semantics.",
+      "Associate a label via htmlFor or aria-labelledby."
+    ],
+    "contrast": "Checked mark against fill holds at least 3:1.",
+    "focus": "Visible focus ring on keyboard focus."
+  },
+  "examples": [
+    {
+      "title": "Agree",
+      "code": "<Checkbox color=\"primary\" checked={ok} onChange={...} />"
+    }
+  ],
+  "related": [
+    {
+      "component": "Switch",
+      "whenToChoose": "Switch for immediate on/off settings; Checkbox for forms."
+    }
+  ]
+}

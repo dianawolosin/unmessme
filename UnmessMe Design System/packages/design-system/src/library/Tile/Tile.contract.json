@@ -1,0 +1,81 @@
+{
+  "component": "Tile",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "pattern",
+  "summary": "A compact glance stat card: a labelled headline metric with an optional hint, accent, and icon.",
+  "purpose": "Use to surface a single at-a-glance number or short value on a dashboard. Compose several in a Grid to summarize a dataset. Built on the glass Surface so it matches the rest of the system.",
+  "import": "import { Tile } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "container", "description": "A raised glass Surface with a colored top rule that reflects the accent." },
+    { "part": "label", "description": "A small overline naming the metric." },
+    { "part": "icon", "description": "Optional leading icon, tinted with the accent color." },
+    { "part": "value", "description": "The headline value, rendered large as a paragraph, not a heading." },
+    { "part": "hint", "description": "Optional supporting line under the value for context." }
+  ],
+  "props": [
+    { "name": "label", "type": "string", "required": true, "default": null, "options": [], "description": "Small uppercase label naming the metric." },
+    { "name": "value", "type": "React.ReactNode", "required": true, "default": null, "options": [], "description": "The headline value: a number, a word, or a short phrase." },
+    { "name": "hint", "type": "string", "required": false, "default": null, "options": [], "description": "Optional supporting line under the value for context." },
+    { "name": "accent", "type": "'urgent' | 'analysis' | 'success' | 'neutral'", "required": false, "default": "neutral", "options": ["urgent", "analysis", "success", "neutral"], "description": "Colors the value and top rule using status tokens to signal severity of the metric." },
+    { "name": "icon", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Optional leading icon, tinted with the accent color." }
+  ],
+  "variants": [
+    { "name": "neutral", "prop": "accent", "description": "No status color; value and rule use the default text and highlight colors.", "whenToUse": "A plain metric that carries no severity signal." },
+    { "name": "urgent", "prop": "accent", "description": "Value and top rule take the urgent status color.", "whenToUse": "A metric that flags a problem the user should notice." },
+    { "name": "analysis", "prop": "accent", "description": "Value and top rule take the analysis status color.", "whenToUse": "A neutral analytical figure such as an average." },
+    { "name": "success", "prop": "accent", "description": "Value and top rule take the success status color.", "whenToUse": "A metric that signals progress or a good state." }
+  ],
+  "states": ["default"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Summarizing a dataset as a row of glance metrics at the top of a dashboard.",
+      "Showing a single headline number with a label and short context."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Presenting a full record with title, body, and actions", "useInstead": "ProblemCard or FeatureCard" },
+      { "scenario": "Showing a trend or distribution over time", "useInstead": "a chart, not a single tile" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep the value to a number, a word, or a very short phrase.",
+      "Use accent to signal severity, not decoration.",
+      "Group several tiles in a Grid so they read as one summary."
+    ],
+    "dont": [
+      "Pack a sentence into the value; move context to the hint.",
+      "Rely on accent color alone to carry meaning; the label and value must still say it."
+    ]
+  },
+  "content": {
+    "voice": "Labels are short and uppercase. Values are terse. Hints add one line of plain context.",
+    "maxLength": null,
+    "rules": ["Label names the metric in a few words.", "Value is a glanceable figure or phrase.", "Hint is one short supporting line."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.status.urgent", "usage": "Value and top rule for the urgent accent." },
+    { "token": "color.semantic.status.analysis", "usage": "Value and top rule for the analysis accent." },
+    { "token": "color.semantic.status.success", "usage": "Value and top rule for the success accent." },
+    { "token": "color.semantic.text.primary", "usage": "Value color when neutral." },
+    { "token": "color.semantic.text.secondary", "usage": "Label and hint color." },
+    { "token": "color.semantic.border.highlight", "usage": "Top rule color when neutral." },
+    { "token": "border.width.base", "usage": "Top rule width." },
+    { "token": "border.style.solid", "usage": "Top rule style." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["No interaction of its own; a tile is a static readout."],
+    "aria": ["The value renders as a paragraph, not a heading, so a row of tiles does not pollute the heading outline."],
+    "contrast": "Accented values clear 3:1 as large text; label and hint clear 4.5:1 against the surface.",
+    "focus": "No focus target of its own."
+  },
+  "examples": [
+    { "title": "Urgent glance metric", "code": "<Tile label=\"Messiest pattern\" value=\"Avoidance\" hint=\"3 of 6 cases\" accent=\"urgent\" />" },
+    { "title": "Neutral count", "code": "<Tile label=\"Active cases\" value={6} />" }
+  ],
+  "related": [
+    { "component": "ProblemCard", "whenToChoose": "Use ProblemCard for a full case with detail and actions; Tile is a one-number summary." },
+    { "component": "Surface", "whenToChoose": "Tile is built on Surface; use Surface directly when you need a bare container." }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "component": "Tabs",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A tab list and tab items for switching peer views in place.",
+  "purpose": "Switch between peer panels without leaving the page. Exports Tabs and Tab.",
+  "import": "import { Tabs, Tab } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "list",
+      "description": "The tab list with the seafoam indicator."
+    },
+    {
+      "part": "tab",
+      "description": "One selectable peer label."
+    }
+  ],
+  "props": [
+    {
+      "name": "value",
+      "type": "string | number",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Controlled selected tab value (Tabs)."
+    },
+    {
+      "name": "onChange",
+      "type": "(event, value) => void",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Selection handler (Tabs)."
+    },
+    {
+      "name": "label",
+      "type": "React.ReactNode",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Tab label (Tab)."
+    },
+    {
+      "name": "value",
+      "type": "string | number",
+      "required": false,
+      "default": null,
+      "options": [],
+      "description": "Tab value (Tab)."
+    }
+  ],
+  "variants": [],
+  "states": [
+    "default",
+    "selected",
+    "focus",
+    "disabled"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Peer views such as Active / Resolved on the dashboard."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Primary navigation across product areas",
+        "useInstead": "AppShell nav"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Keep tab labels short.",
+      "One selected tab at a time."
+    ],
+    "dont": [
+      "Nest tabs inside tabs."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.action.primary",
+      "usage": "Selected indicator."
+    },
+    {
+      "token": "color.semantic.border.subtle",
+      "usage": "List bottom border."
+    },
+    {
+      "token": "spacing.semantic.layout.touch_target",
+      "usage": "Min tab height."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Arrow keys move between tabs.",
+      "Enter or Space activates."
+    ],
+    "aria": [
+      "role=tablist, tab, and tabpanel pairing."
+    ],
+    "contrast": "Selected and unselected labels hold at least 4.5:1.",
+    "focus": "Visible focus on the active tab."
+  },
+  "examples": [
+    {
+      "title": "Dashboard peers",
+      "code": "<Tabs value={v} onChange={...}><Tab label=\"Active\" value=\"a\" /><Tab label=\"Resolved\" value=\"r\" /></Tabs>"
+    }
+  ],
+  "related": [
+    {
+      "component": "AppShell",
+      "whenToChoose": "AppShell for product-level navigation."
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "component": "Badge",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "atom",
+  "summary": "A notification count or status dot attached to another control.",
+  "purpose": "Signal unread counts or live status on an icon or avatar. Not a category label.",
+  "import": "import { Badge } from '@unmessme/design-system';",
+  "anatomy": [
+    {
+      "part": "marker",
+      "description": "The dot or count bubble."
+    },
+    {
+      "part": "anchor",
+      "description": "The child the badge attaches to."
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "'dot' | 'standard'",
+      "required": false,
+      "default": "standard",
+      "options": [
+        "dot",
+        "standard"
+      ],
+      "description": "Dot for presence; standard for a count."
+    },
+    {
+      "name": "color",
+      "type": "'primary' | 'urgent' | 'analysis' | 'success'",
+      "required": false,
+      "default": "primary",
+      "options": [
+        "primary",
+        "urgent",
+        "analysis",
+        "success"
+      ],
+      "description": "Semantic color of the marker."
+    },
+    {
+      "name": "children",
+      "type": "React.ReactNode",
+      "required": true,
+      "default": null,
+      "options": [],
+      "description": "The anchored control."
+    }
+  ],
+  "variants": [
+    {
+      "name": "dot",
+      "prop": "variant",
+      "description": "Small status marker, no number.",
+      "whenToUse": "Presence or unread without a count."
+    },
+    {
+      "name": "standard",
+      "prop": "variant",
+      "description": "Numeric count.",
+      "whenToUse": "Unread or pending counts."
+    }
+  ],
+  "states": [
+    "default"
+  ],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Notification counts on nav or icons.",
+      "A live status dot on an avatar."
+    ],
+    "whenNotToUse": [
+      {
+        "scenario": "Labeling a category on a card",
+        "useInstead": "Tag"
+      }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Map color through the semantic prop.",
+      "Keep counts short."
+    ],
+    "dont": [
+      "Use Badge as a standalone label in a layout."
+    ]
+  },
+  "tokensUsed": [
+    {
+      "token": "color.semantic.action.primary",
+      "usage": "Primary marker."
+    },
+    {
+      "token": "color.semantic.status.urgent",
+      "usage": "Urgent marker."
+    }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": [
+      "Badge itself is not focusable; the child is."
+    ],
+    "aria": [
+      "Expose the count to assistive tech via aria-label on the child when needed."
+    ],
+    "contrast": "Marker against the surface holds at least 3:1.",
+    "focus": "Inherited from the child control."
+  },
+  "examples": [
+    {
+      "title": "Unread",
+      "code": "<Badge color=\"urgent\" badgeContent={3}><Icon>...</Icon></Badge>"
+    }
+  ],
+  "related": [
+    {
+      "component": "Tag",
+      "whenToChoose": "Tag for categories; Badge for counts and dots."
+    }
+  ]
+}

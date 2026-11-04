@@ -1,0 +1,69 @@
+{
+  "component": "Footer",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "layout",
+  "summary": "A structural site footer with brand, link columns, socials, and legal copy.",
+  "purpose": "Close a marketing surface with navigation and legal lines. It carries no product content of its own; brand, links, and copy are passed in, so the design system stays content-free.",
+  "import": "import { Footer } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "brand block", "description": "Brand name, optional tagline, and social icon buttons." },
+    { "part": "link columns", "description": "Titled columns of navigation links." },
+    { "part": "bottom bar", "description": "Copyright, optional address, and a closing note or disclaimer." }
+  ],
+  "props": [
+    { "name": "brand", "type": "string", "required": false, "default": "UnmessMe", "options": [], "description": "Product or brand name." },
+    { "name": "tagline", "type": "string", "required": false, "default": null, "options": [], "description": "Small line under the brand." },
+    { "name": "columns", "type": "FooterLinkColumn[]", "required": false, "default": [], "options": [], "description": "Columns of navigation links, each { title, links }." },
+    { "name": "socials", "type": "FooterSocialLink[]", "required": false, "default": [], "options": [], "description": "Social links, each { label, icon, href }; icons supplied by the consumer." },
+    { "name": "address", "type": "string", "required": false, "default": null, "options": [], "description": "A single line of address or location text." },
+    { "name": "copyright", "type": "string", "required": false, "default": null, "options": [], "description": "Copyright line." },
+    { "name": "note", "type": "string", "required": false, "default": null, "options": [], "description": "A closing note or disclaimer." }
+  ],
+  "states": ["default"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "Closing a marketing or landing surface with navigation and legal copy.",
+      "Any page that needs brand, sitemap links, and socials in one block."
+    ],
+    "whenNotToUse": [
+      { "scenario": "The whole-page frame and header", "useInstead": "AppShell" },
+      { "scenario": "A dense in-app dashboard with no marketing chrome", "useInstead": "no footer" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Supply your own brand, links, and legal copy as props.",
+      "Give every social link a descriptive label for its aria-label."
+    ],
+    "dont": [
+      "Expect product copy baked in; the component ships content-free.",
+      "Hardcode link colors; they come from tokens."
+    ]
+  },
+  "content": {
+    "voice": "Marketing voice for links and tagline; plain and factual for legal lines.",
+    "maxLength": null,
+    "rules": ["Column titles are short nouns.", "Disclaimers stay literal, no jokes that read as legal claims."]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.border.subtle", "usage": "Top borders and social button borders." },
+    { "token": "color.semantic.text.primary", "usage": "Brand and link text." },
+    { "token": "color.semantic.text.secondary", "usage": "Tagline, column titles, legal lines." },
+    { "token": "color.semantic.action.primary", "usage": "Hover color for links and socials." },
+    { "token": "typography.primitive.fontFamily.mono", "usage": "Link and legal typeface." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["All links and social buttons are reachable in DOM order."],
+    "aria": ["Renders a footer landmark.", "Each social icon button carries an aria-label from its label."],
+    "contrast": "Link and legal text hold at least 4.5:1 against the canvas.",
+    "focus": "Visible focus on links and social buttons."
+  },
+  "examples": [
+    { "title": "Full footer", "code": "<Footer brand=\"UnmessMe\" tagline=\"therapy-parody for your hot mess\" columns={cols} socials={socials} copyright=\"\u00a9 2025 UnmessMe Inc.\" />" }
+  ],
+  "related": [
+    { "component": "AppShell", "whenToChoose": "AppShell is the page frame and header; Footer is the closing block inside it." }
+  ]
+}

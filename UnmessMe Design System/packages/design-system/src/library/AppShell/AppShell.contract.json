@@ -1,0 +1,62 @@
+{
+  "component": "AppShell",
+  "status": "stable",
+  "version": "1.0.0",
+  "category": "layout",
+  "summary": "The top-level page frame: canvas background, film-grain overlay, and a header bar.",
+  "purpose": "Wrap every UnmessMe screen so the Midnight Terminal canvas, the noise texture, and the branded header are consistent. Reach for it as the outermost layout of any full page.",
+  "import": "import { AppShell } from '@unmessme/design-system';",
+  "anatomy": [
+    { "part": "canvas", "description": "Full-height background painted with the canvas token." },
+    { "part": "noise overlay", "description": "Decorative animated film-grain layer, non-interactive." },
+    { "part": "header bar", "description": "The UnmessMe wordmark on the left and header actions or an avatar on the right." },
+    { "part": "main", "description": "The centered, max-width content region that renders children." }
+  ],
+  "props": [
+    { "name": "children", "type": "React.ReactNode", "required": true, "default": null, "options": [], "description": "The page content rendered inside the main region." },
+    { "name": "userAvatarUrl", "type": "string", "required": false, "default": null, "options": [], "description": "Avatar image shown in the header when no headerActions are given." },
+    { "name": "headerActions", "type": "React.ReactNode", "required": false, "default": null, "options": [], "description": "Custom right-side header content; replaces the avatar." }
+  ],
+  "states": ["default"],
+  "usageGuidelines": {
+    "whenToUse": [
+      "As the outermost wrapper of a full UnmessMe page, both marketing and app surfaces.",
+      "Anywhere the branded header and canvas background must be present."
+    ],
+    "whenNotToUse": [
+      { "scenario": "Wrapping a nested section or a single content block", "useInstead": "Surface" },
+      { "scenario": "A focused overlay on top of the page", "useInstead": "Dialog" }
+    ]
+  },
+  "doDont": {
+    "do": [
+      "Use exactly one AppShell per screen, at the root.",
+      "Pass page-level nav or actions through headerActions."
+    ],
+    "dont": [
+      "Nest an AppShell inside another AppShell.",
+      "Repaint the canvas background inside children; it is already set."
+    ]
+  },
+  "tokensUsed": [
+    { "token": "color.semantic.bg.canvas", "usage": "Page background." },
+    { "token": "color.semantic.border.subtle", "usage": "Header bottom border." },
+    { "token": "color.semantic.text.primary", "usage": "Wordmark color." },
+    { "token": "typography.primitive.fontFamily.serif", "usage": "Wordmark typeface." }
+  ],
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "keyboard": ["Header actions are reachable in DOM order."],
+    "aria": ["Content region is a main landmark.", "Noise overlay is decorative and non-interactive."],
+    "contrast": "Wordmark and header content hold at least 4.5:1 against the canvas.",
+    "focus": "No focus trap; this is page chrome, not a modal."
+  },
+  "examples": [
+    { "title": "Marketing page", "code": "<AppShell headerActions={<Nav />}>{children}</AppShell>" },
+    { "title": "App page", "code": "<AppShell headerActions={<Button variant=\"ghost\" size=\"sm\">Back to Site</Button>}>{children}</AppShell>" }
+  ],
+  "related": [
+    { "component": "Footer", "whenToChoose": "Footer is site chrome placed inside AppShell content; AppShell is the whole-page frame." },
+    { "component": "Surface", "whenToChoose": "Surface is a single panel inside the page; AppShell is the page itself." }
+  ]
+}
